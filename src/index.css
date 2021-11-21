@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -84,9 +90,25 @@ header {
   transform: translate(-5%, -10%);
 }
 .main_text {
+  width: 14ch;
   font-weight: 900;
   font-size: 4rem;
   color: var(--main-text);
+  animation: typing 2s steps(14), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  /* border-right: 3px solid; */
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 .below_text {
   margin-top: 4%;
@@ -162,11 +184,40 @@ header {
   height: fit-content;
   box-shadow: 0px 15px 51px -11px rgba(30, 30, 60, 0.25);
   cursor: pointer;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.property_card:hover {
+  transform: translateZ(12px);
+}
+
+.property_card {
+  transition-duration: 300ms;
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-out;
+  transform: rotate3d(0);
+}
+
+.property_card:hover {
+  transition-duration: 150ms;
+  /* box-shadow: 0 5px 20px 5px #00000044; */
+}
+
+.property_card .glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+
+  background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
 }
 .property_price {
   color: var(--main-text);
   font-weight: 700;
   margin: 3% 4%;
+  transform: translateZ(20px);
 }
 .card_lower {
   display: flex;

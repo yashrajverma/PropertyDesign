@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HomeIllustration from '../img/house illustration.svg'
 import Testimonial from '../img/company.svg'
 import rating from '../img/Star.svg'
@@ -12,6 +12,57 @@ import number_card from '../img/number_card.png'
 import home_illus from '../img/home_illustration.png'
 import social from '../img/social.png'
 const HeroSection = () => {
+
+    const method = () => {
+        const $card = document.querySelector('.head_img');
+        let bounds;
+
+        function rotateToMouse(e) {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            const leftX = mouseX - bounds.x;
+            const topY = mouseY - bounds.y;
+            const center = {
+                x: leftX - bounds.width / 2,
+                y: topY - bounds.height / 2
+            }
+            const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+
+            $card.style.transform = `
+    scale3d(1, 1, 1)
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance) * 3}deg
+    )
+  `;
+
+            //             $card.querySelector('.glow').style.backgroundImage = `
+            //     radial-gradient(
+            //       circle at
+            //       ${center.x * 2 + bounds.width / 2}px
+            //       ${center.y * 2 + bounds.height / 2}px,
+            //       #ffffff55,
+            //       #0000000f
+            //     )
+            //   `;
+        }
+
+        $card.addEventListener('mouseenter', () => {
+            bounds = $card.getBoundingClientRect();
+            document.addEventListener('mousemove', rotateToMouse);
+        });
+
+        $card.addEventListener('mouseleave', () => {
+            document.removeEventListener('mousemove', rotateToMouse);
+            $card.style.transform = '';
+            $card.style.background = '';
+        });
+    }
+    useEffect(() => {
+        method()
+    }, [])
     return (
         <>
             <header>
@@ -19,8 +70,8 @@ const HeroSection = () => {
                     <div className="col-lg-7 col-md-7 col-sm-12 mx-auto">
                         <div className="head_text">
                             <p className="text-secondary">Welcome to Digital Yashraj</p>
-                            <h1 className="main_text">Discover a place<br />
-                                you'll love to live.</h1>
+                            <h1 className="main_text">Discover a place</h1>
+                            <h1 className="main_text"> you'll love to live.</h1>
                             <p className="text-secondary below_text">Get the best real estate deals first,
                                 before they hit the mass market! HOT FORECLOSURE DEALS with one simple search</p>
                             <button className="head_btn">More About Us.</button>
