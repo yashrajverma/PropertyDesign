@@ -11,8 +11,18 @@ import PropertyCard from './PropertyCard'
 import number_card from '../img/number_card.png'
 import home_illus from '../img/home_illustration.png'
 import social from '../img/social.png'
-const HeroSection = () => {
 
+
+const HeroSection = () => {
+    const particlesInit = (main) => {
+        console.log(main);
+
+        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+    };
+
+    const particlesLoaded = (container) => {
+        console.log(container);
+    };
     const method = () => {
         const $card = document.querySelector('.head_img');
         let bounds;
